@@ -1,3 +1,8 @@
+def listar_titulo_anyo_duracion(doc):
+	for i in doc:
+   		print("Titulo:",i["title"],"// Año:",i["year"],"// Duración:",i["duration"])
+
+
 import json
 
 import codecs
@@ -15,6 +20,7 @@ while True:
 	opcion = input("Opción: ")
 
 	if opcion=="1":
+		print(listar_titulo_anyo_duracion(doc))
 
 	if opcion =="0":
 		break
