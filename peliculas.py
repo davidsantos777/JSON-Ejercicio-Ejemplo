@@ -6,6 +6,16 @@ def mostrar_peliculas_num_actores(doc):
 	for i in doc:
 		print("Titulo:",i["title"],"// Nº de actores/actrizes:",len(i["actors"]))
 
+def sinopsis_dos_palabras_dadas(doc,primera_palabra,segunda_palabra):
+	lista_peliculas = []
+	for i in doc:
+		sinopsis = i["storyline"]
+		if sinopsis.count(primera_palabra) > 0 and sinopsis.count(segunda_palabra) > 0:
+			lista_peliculas.append(i["title"])
+	return lista_peliculas
+
+
+
 import json
 
 import codecs
@@ -27,6 +37,12 @@ while True:
 
 	if opcion=="2":
 		print(mostrar_peliculas_num_actores(doc))
+
+	if opcion=="3":
+		primera_palabra = str(input("Dime una palabra: "))
+		segunda_palabra = str(input("Dime otra palabra: "))
+		for pelicula in sinopsis_dos_palabras_dadas(doc,primera_palabra,segunda_palabra):
+			print("Título:",pelicula)
 
 	if opcion =="0":
 		break
