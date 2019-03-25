@@ -1,10 +1,12 @@
+import statistics as stats
+
 def listar_titulo_anyo_duracion(doc):
 	for i in doc:
    		print("Titulo:",i["title"],"// Año:",i["year"],"// Duración:",i["duration"])
 
 def mostrar_peliculas_num_actores(doc):
 	for i in doc:
-		print("Titulo:",i["title"],"// Nº de actores/actrizes:",len(i["actors"]))
+		print("Titulo:",i["title"],"// Nº de actores/actrices:",len(i["actors"]))
 
 def sinopsis_dos_palabras_dadas(doc,primera_palabra,segunda_palabra):
 	lista_peliculas = []
@@ -22,6 +24,17 @@ def mostrar_peliculas_actor_dado(doc,actor):
 				lista_peliculas.append(i["title"])
 	return lista_peliculas
 
+def mostrar_titulo_url_poster(doc,fecha_1,fecha_2):
+	lista_peliculas = []
+	lista_url_poster = []
+	for i in doc:
+		fecha = i["year"]
+		puntuaciones = i["ratings"]
+		media_puntuacion = str(stats.mean(puntuaciones))
+		if fecha >= fecha_1 and fecha <= fecha_2 and max(media_puntuacion):
+			lista_peliculas.append(i["title"])
+			lista_url_poster.append(i["posterurl"])
+	return zip(lista_peliculas,lista_url_poster)
 
 import json
 
@@ -56,7 +69,11 @@ while True:
 		for pelicula in mostrar_peliculas_actor_dado(doc,actor):
 			print("Título:",pelicula)
 
-
+	if opcion=="5":
+		fecha_1 = input("Dime una fecha: ")
+		fecha_2 = input("Dime otra fecha: ")
+		for pelicula,url in mostrar_titulo_url_poster(doc,fecha_1,fecha_2):
+			print("Título:",pelicula,"// URL del póster:",url)
 
 	if opcion =="0":
 		break
