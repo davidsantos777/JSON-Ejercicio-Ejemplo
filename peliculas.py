@@ -14,6 +14,13 @@ def sinopsis_dos_palabras_dadas(doc,primera_palabra,segunda_palabra):
 			lista_peliculas.append(i["title"])
 	return lista_peliculas
 
+def mostrar_peliculas_actor_dado(doc,actor):
+	lista_peliculas = []
+	for i in doc:
+		for nombre_actor in i["actors"]:
+			if nombre_actor == actor:
+				lista_peliculas.append(i["title"])
+	return lista_peliculas
 
 
 import json
@@ -39,10 +46,17 @@ while True:
 		print(mostrar_peliculas_num_actores(doc))
 
 	if opcion=="3":
-		primera_palabra = str(input("Dime una palabra: "))
-		segunda_palabra = str(input("Dime otra palabra: "))
+		primera_palabra = input("Dime una palabra: ")
+		segunda_palabra = input("Dime otra palabra: ")
 		for pelicula in sinopsis_dos_palabras_dadas(doc,primera_palabra,segunda_palabra):
 			print("Título:",pelicula)
+
+	if opcion=="4":
+		actor = input("Dime el nombre de un actor: ")
+		for pelicula in mostrar_peliculas_actor_dado(doc,actor):
+			print("Título:",pelicula)
+
+
 
 	if opcion =="0":
 		break
