@@ -2,6 +2,9 @@ def listar_titulo_anyo_duracion(doc):
 	for i in doc:
    		print("Titulo:",i["title"],"// Año:",i["year"],"// Duración:",i["duration"])
 
+def mostrar_peliculas_num_actores(doc):
+	for i in doc:
+		print("Titulo:",i["title"],"// Nº de actores/actrizes:",len(i["actors"]))
 
 import json
 
@@ -21,6 +24,9 @@ while True:
 
 	if opcion=="1":
 		print(listar_titulo_anyo_duracion(doc))
+
+	if opcion=="2":
+		print(mostrar_peliculas_num_actores(doc))
 
 	if opcion =="0":
 		break
