@@ -25,16 +25,22 @@ def mostrar_peliculas_actor_dado(doc,actor):
 	return lista_peliculas
 
 def mostrar_titulo_url_poster(doc,fecha_1,fecha_2):
+	lista_1 = []
+	lista_2 = []
+	lista_ratings = []
 	lista_peliculas = []
-	lista_url_poster = []
+	lista_url = []
+	media_peliculas = {}
 	for i in doc:
-		fecha = i["year"]
-		puntuaciones = i["ratings"]
-		media_puntuacion = str(stats.mean(puntuaciones))
-		if fecha >= fecha_1 and fecha <= fecha_2 and max(media_puntuacion):
-			lista_peliculas.append(i["title"])
-			lista_url_poster.append(i["posterurl"])
-	return zip(lista_peliculas,lista_url_poster)
+		if fecha_1 <= i["releaseDate"] and fecha_2 >= i["releaseDate"]:
+			lista_ratings.append(sum(i["ratings"]) / len(i["ratings"]))
+			if sum(i["ratings"]) / len(i["ratings"]) == max(lista_ratings):
+				lista_peliculas.append(i["title"])
+				lista_url.append(i["posterurl"])
+	media_peliculas = [lista_peliculas[:3],lista_url[:3]]
+	lista_1.append(media_peliculas[0])
+	lista_2.append(media_peliculas[1])
+	return zip(lista_1,lista_2)
 
 import json
 
@@ -73,7 +79,7 @@ while True:
 		fecha_1 = input("Dime una fecha: ")
 		fecha_2 = input("Dime otra fecha: ")
 		for pelicula,url in mostrar_titulo_url_poster(doc,fecha_1,fecha_2):
-			print("Título:",pelicula,"// URL del póster:",url)
+			print("Títulos:",pelicula,"URLs:",url)
 
 	if opcion =="0":
 		break
